@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
-using System.Text.Json.Serialization; // Add this namespace
+using System.Text.Json.Serialization;
 
+
+// This Class Defines The Car Model.
 namespace RentCar.models
 {
     public class Car

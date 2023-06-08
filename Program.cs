@@ -25,8 +25,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 // Connecting To Database
 builder.Services.AddDbContext<DataContext>(options =>
-        options.UseMySql("server=localhost;user=root;password=;database=ReacreatingTest;",
-            ServerVersion.AutoDetect("server=localhost;user=root;password=;database=ReacreatingTest;")));
+        options.UseMySql("server=localhost;user=root;password=admin;database=stepapi;",
+            ServerVersion.AutoDetect("server=localhost;user=root;password=admin;database=stepapi;")));
 
 
 // Services
@@ -46,9 +46,14 @@ var app = builder.Build();
 }
 
 
+// Seed Data
+// Faker
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
+    // Provide How Many Entities You Want To Seed
+    // When Running Application Whith Uncommented Seeder It Will Seed Data.
+
 
     //DataSeeder.SeedCars(serviceProvider, 1000);
     //DataSeeder.SeedUsers(serviceProvider, 1000);

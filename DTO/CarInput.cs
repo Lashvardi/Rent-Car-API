@@ -2,6 +2,7 @@
 {
     public class CarInputModel
     {
+        // This Class Is Used For Inputting Data To The Database.
         public string Brand { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
@@ -13,6 +14,7 @@
         public IFormFile Image2 { get; set; }
         public IFormFile Image3 { get; set; }
 
+        // For Future Working With MapBox API (In Frontend)
         public double Latitude { get; set; } // Latitude property
         public double Longitude { get; set; } // Longitude property
     }

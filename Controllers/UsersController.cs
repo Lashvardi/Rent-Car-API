@@ -56,23 +56,23 @@ namespace RentCar.Controllers
             return Ok(user);
         }
 
-        [HttpPost("login")]
-        public async Task<ActionResult> Login(UserDTO request)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == request.PhoneNumber);
-            if (user == null)
+            [HttpPost("login")]
+            public async Task<ActionResult> Login(UserDTO request)
             {
-                return BadRequest("User Not Found!");
-            }
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == request.PhoneNumber);
+                if (user == null)
+                {
+                    return BadRequest("User Not Found!");
+                }
 
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                return BadRequest("Wrong Password");
-            }
+                if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+                {
+                    return BadRequest("Wrong Password");
+                }
 
-            var token = CreateToken(user);
-            return Ok(new { token, user.FirstName, user.LastName, user.Role, user.PhoneNumber, user.Email });
-        }
+                var token = CreateToken(user);
+                return Ok(new { token, user.FirstName, user.LastName, user.Role, user.PhoneNumber, user.Email });
+            }
 
         [HttpGet("{phoneNumber}/favorite-cars")]
         public IActionResult GetFavoriteCars(string phoneNumber)

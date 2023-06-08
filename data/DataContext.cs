@@ -19,6 +19,8 @@ namespace RentCar.data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            // Defining Primary Keys For User
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.PhoneNumber);
@@ -26,28 +28,32 @@ namespace RentCar.data
                 entity.Property(e => e.PasswordSalt).IsRequired();
             });
 
+            // Defining Relationship For UserFavoriteCar
             modelBuilder.Entity<UserFavoriteCar>()
                 .HasOne(uf => uf.User)
                 .WithMany(u => u.FavoriteCars)
                 .HasForeignKey(uf => uf.UserId);
 
+            // Defining Relationship For UserFavoriteCar
             modelBuilder.Entity<UserFavoriteCar>()
                 .HasOne(uf => uf.Car)
                 .WithMany(c => c.FavoritedByUsers)
                 .HasForeignKey(uf => uf.CarId);
 
 
-
+            // Defining Relationship For Car
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.Owner)
                 .WithOne(u => u.Car)
                 .HasForeignKey<Car>(c => c.OwnerPhoneNumber);
 
+            // Defining Relationship For Purchase
             modelBuilder.Entity<Purchase>()
                 .HasOne(p => p.User)
                 .WithMany(u => u.Purchases)
                 .HasForeignKey(p => p.PhoneNumber);
 
+            // Defining Relationship For Purchase
             modelBuilder.Entity<Purchase>()
                 .HasOne(p => p.Car)
                 .WithMany(c => c.Purchases)

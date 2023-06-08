@@ -2,7 +2,7 @@
 using RentCar.Repository.Abstract;
 
 namespace RentCar.Repository.Implementation;
-
+// This Class Is Used For Saving Images To The Database.
 public class FileService : IFileService
 {
 
@@ -23,7 +23,7 @@ public class FileService : IFileService
         {
             Directory.CreateDirectory(path);
         }
-
+        // Check File Extension
         var ext = Path.GetExtension(imageFile.FileName);
         var allowedExtensions = new[] { ".jpg", ".png", ".jpeg" };
 
@@ -33,7 +33,7 @@ public class FileService : IFileService
         }
 
         string uniqueString = Guid.NewGuid().ToString();
-
+        // Save File
         var newFileName = uniqueString + ext;
         var fileWithPath = Path.Combine(path, newFileName);
         var stream = new FileStream(fileWithPath, FileMode.Create);

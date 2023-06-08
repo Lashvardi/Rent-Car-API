@@ -14,7 +14,8 @@ namespace RentCar.Controllers
         {
             _context = context;
         }
-
+        // Sending Post Request To Send Message
+        // Gets PhoneNumber/CarId
         [HttpPost("Message")]
         public IActionResult SendMessage(string phoneNumber, int CarId)
         {
@@ -43,6 +44,8 @@ namespace RentCar.Controllers
             return Ok(randomMessage);
         }
 
+        // Sending Get Request To Get Message
+        // Gets PhoneNumber
         [HttpGet("Messages")]
         public IActionResult GetMessages(string phoneNumber)
         {

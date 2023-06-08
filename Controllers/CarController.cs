@@ -21,18 +21,26 @@ namespace RentCar.Controllers
             _fileService = fs;
         }
 
+
+        // Getting  Random 20 Cars
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Car>>> GetCars(int pageIndex = 0, int pageSize = 100)
+        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
             var cars = await _context.Cars
-                .OrderBy(c => c.Id)
-                .Skip(pageIndex * pageSize)
-                .Take(pageSize)
+                .OrderBy(c => Guid.NewGuid())
+                .Take(12)
                 .ToListAsync();
+
+            if (cars == null || !cars.Any())
+            {
+                return NotFound();
+            }
 
             return cars;
         }
 
+
+        // Sending Get Request To Get All Cars (Paginated)
         [HttpGet("paginated")]
         public async Task<ActionResult<PaginatedData<Car>>> GetPaginatedCars(int pageIndex = 1, int pageSize = 10)
         {
@@ -68,6 +76,7 @@ namespace RentCar.Controllers
         }
 
 
+        // Sending Get Request To Get All Cars (Paginated, Filtered)
         [HttpGet("filter")]
         public async Task<ActionResult<IEnumerable<Car>>> FilterCars(int? capacity, int? startYear, int? endYear, string city, int pageIndex = 1, int pageSize = 10)
         {
@@ -121,6 +130,7 @@ namespace RentCar.Controllers
 
 
 
+        // Sending Get Request To Get Popular Cars
         [HttpGet("popular")]
         public async Task<ActionResult<IEnumerable<Car>>> GetPopularCars()
         {
@@ -138,6 +148,7 @@ namespace RentCar.Controllers
         }
 
 
+        // Sending Get Request To Get Cars By Owner
         [HttpGet("byPhone")]
         public async Task<ActionResult<IEnumerable<Car>>> GetCarsByOwner(string PhoneNumber)
         {
@@ -151,6 +162,7 @@ namespace RentCar.Controllers
             return cars;
         }
 
+        // Sending Get Reqeust To Get All Cities.
         [HttpGet("cities")]
         public async Task<ActionResult<IEnumerable<string>>> GetCities()
         {
@@ -164,6 +176,7 @@ namespace RentCar.Controllers
             return cities;
         }
 
+        // Sending Get Request To Get Car By Id
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCar(int id)
         {
@@ -178,6 +191,7 @@ namespace RentCar.Controllers
         }
 
 
+        // Sending Post Request To Create New Car
         [HttpPost]
         public async Task<ActionResult<Car>> PostCar([FromForm] CarInputModel carInput)
         {

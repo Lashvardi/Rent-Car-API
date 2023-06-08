@@ -9,6 +9,8 @@ public class SendRentMail
     public async Task SendRentEmail(string recipientEmail, string CarModel, string CarMark, double PricePaid, int multiplier)
     {
         // SendGrid
+        // https://app.sendgrid.com/guide/integrate/langs/csharp
+        // https://app.sendgrid.com/settings/api_keys
         var client = new SendGridClient("<YOUR TOKEN HERE>");
         var from = new EmailAddress("<YOUR MAIL ADDRESS>", "Montez");
         var to = new EmailAddress(recipientEmail);

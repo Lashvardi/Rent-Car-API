@@ -2,6 +2,9 @@
 
 public class Purchase
 {
+    // Relationship For Purchasing Car
+    // User Can Purchase Many Cars
+    // Car Can Be Purchased By Many Users
     public int PurchaseID { get; set; }
     public string PhoneNumber { get; set; }
     public int CarId { get; set; }

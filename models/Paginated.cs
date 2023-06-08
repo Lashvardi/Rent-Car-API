@@ -1,5 +1,6 @@
 ﻿namespace RentCar.models;
 
+// This class is used for pagination
 public class PaginatedData<T>
 {
     public int TotalItems { get; set; }

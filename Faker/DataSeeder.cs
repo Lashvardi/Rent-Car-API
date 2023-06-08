@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.Text;
 using RentCar.data;
 
+// This Class Is Used To Generate Fake Data
+// Implementation In Program.cs
 namespace RentCar.Faker
 {
     public static class DataSeeder
     {
         public static List<Car> SeedCars(IServiceProvider serviceProvider, int Quantity)
         {
+            // Creating Faker For Car
+            // Faker Is Used For Generating Fake Data
             var carFaker = new Faker<Car>()
                 .RuleFor(c => c.Brand, f => f.Vehicle.Manufacturer())
                 .RuleFor(c => c.Model, f => f.Vehicle.Model())
@@ -30,6 +34,7 @@ namespace RentCar.Faker
             List<Car> cars = carFaker.Generate(Quantity);
             using (var scope = serviceProvider.CreateScope())
             {
+                // Getting DbContext From Service Provider
                 var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
                 dbContext.Cars.AddRange(cars);
                 dbContext.SaveChanges();
@@ -41,6 +46,7 @@ namespace RentCar.Faker
 
         public static List<User> SeedUsers(IServiceProvider serviceProvider, int Quantity)
         {
+            // Creating Faker For User
             var userFaker = new Faker<User>()
                 .RuleFor(u => u.PhoneNumber, f => f.Phone.PhoneNumber())
                 .RuleFor(u => u.PasswordHash, f => Encoding.UTF8.GetBytes("1609"))

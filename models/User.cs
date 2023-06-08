@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using RentCar.models;
-using System.Text.Json.Serialization; // Add this namespace
+using System.Text.Json.Serialization;
 
+// This Class Defines The User Model.
 namespace RentCar.models
 {
     public class User

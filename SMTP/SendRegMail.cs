@@ -9,6 +9,8 @@ namespace SMTP
         public async Task SendRegistrationEmail(string recipientEmail, string firstName, string lastName)
         {
             // SendGrid
+            // https://app.sendgrid.com/guide/integrate/langs/csharp
+            // https://app.sendgrid.com/settings/api_keys
             var client = new SendGridClient("<YOUR TOKEN HERE>");
             var from = new EmailAddress("<YOUR MAIL ADDRESS>", "Morent");
             var to = new EmailAddress(recipientEmail);
