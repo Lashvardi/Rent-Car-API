@@ -20,13 +20,21 @@ namespace RentCar.data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            // Defining Primary Keys For User
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.PhoneNumber);
                 entity.Property(e => e.PasswordHash).IsRequired();
                 entity.Property(e => e.PasswordSalt).IsRequired();
+
+                // Assuming there is a Navigation Property named "RelatedEntities" in the User class
+                entity.HasMany(e => e.FavoriteCars)
+                    .WithOne()  // Use .WithOne(e => e.User) if there is a reference to User in the related entity
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(e => e.Purchases) .WithOne().OnDelete(DeleteBehavior.Cascade);
+
             });
+
 
             // Defining Relationship For UserFavoriteCar
             modelBuilder.Entity<UserFavoriteCar>()
