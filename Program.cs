@@ -25,8 +25,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 // Connecting To Database
 builder.Services.AddDbContext<DataContext>(options =>
-        options.UseMySql("server=localhost;user=root;password=;database=steptestapi;",
-            ServerVersion.AutoDetect("server=localhost;user=root;password=;database=steptestapi;")));
+        options.UseMySql("server=localhost;user=root;password=;database=FinalTest;",
+            ServerVersion.AutoDetect("server=localhost;user=root;password=;database=FinalTest;")));
 
 
 // Services
