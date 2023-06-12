@@ -22,7 +22,7 @@ namespace RentCar.Controllers
         }
 
 
-        // Getting  Random 20 Cars
+        // Getting  Random 10 Cars
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
@@ -202,9 +202,14 @@ namespace RentCar.Controllers
                 Year = carInput.Year,
                 Price = carInput.Price,
                 Capacity = carInput.Capacity,
+                FuelCapacity = carInput.FuelCapacity,
                 Transmission = carInput.Transmission,
                 CreatedBy = carInput.CreatedBy,
-                                               
+                CreatedByEmail = carInput.CreatedByEmail,
+                City = carInput.City,
+                Latitude = carInput.Latitude,
+                Longitude = carInput.Longitude,
+
             };
 
             // Check for null images and save them if provided
