@@ -25,8 +25,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 // Connecting To Database
 builder.Services.AddDbContext<DataContext>(options =>
-        options.UseMySql("server=localhost;user=root;password=;database=FinalTest;",
-            ServerVersion.AutoDetect("server=localhost;user=root;password=;database=FinalTest;")));
+        options.UseMySql("server=localhost;user=root;password=admin;database=LimitatorTest;",
+            ServerVersion.AutoDetect("server=localhost;user=root;password=admin;database=LimitatorTest;")));
 
 
 // Services
@@ -55,7 +55,7 @@ using (var scope = app.Services.CreateScope())
     // When Running Application Whith Uncommented Seeder It Will Seed Data.
 
 
-    //DataSeeder.SeedCars(serviceProvider, 1000);
+    //DataSeeder.SeedCars(serviceProvider, 500);
     //DataSeeder.SeedUsers(serviceProvider, 1000);
 }
 

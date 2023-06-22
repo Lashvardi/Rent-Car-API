@@ -192,6 +192,7 @@ namespace RentCar.Controllers
 
 
         // Sending Post Request To Create New Car
+        // Will Implement Stack 
         [HttpPost]
         public async Task<ActionResult<Car>> PostCar([FromForm] CarInputModel carInput)
         {
@@ -243,11 +244,28 @@ namespace RentCar.Controllers
                 }
             }
 
+            int count = await _context.Cars.CountAsync();
+
+            if (count >= 500)
+            {
+                var firstCar = await _context.Cars.Include(c => c.FavoritedByUsers).Include(c => c.Purchases).FirstOrDefaultAsync();
+
+                if (firstCar != null)
+                {
+                    // Had to remove the related entities manually because of the foreign key constraint
+                    _context.UserFavoriteCars.RemoveRange(firstCar.FavoritedByUsers);
+                    _context.Purchases.RemoveRange(firstCar.Purchases);
+                    _context.Cars.Remove(firstCar);
+                }
+            }
+
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(GetCar), new { id = car.Id }, car);
         }
+
+
+
 
 
     }
