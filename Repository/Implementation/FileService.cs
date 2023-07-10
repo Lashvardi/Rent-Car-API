@@ -40,7 +40,7 @@ public class FileService : IFileService
         imageFile.CopyTo(stream);
         stream.Close();
 
-        var baseUrl = "https://localhost:7149/resources/";
+        var baseUrl = "https://rentcar.webwide.ge/resources/";
         var fullImageUrl = baseUrl + newFileName;
 
         return new Tuple<int, string>(1, fullImageUrl);
